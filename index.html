@@ -1,0 +1,252 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tax Pro | Expert UK Tax Advisor | Freelancers, Landlords, Sole Traders</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the Inter font and smooth transitions */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Slate-50 background */
+            min-height: 100vh;
+        }
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .nav-link.active {
+            color: #1d4ed8; /* blue-700 */
+            border-bottom: 2px solid #3b82f6; /* blue-500 */
+            padding-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 flex flex-col items-center">
+
+    <!-- Header / Navbar -->
+    <header class="w-full max-w-4xl flex justify-between items-center py-4 mb-8 border-b border-gray-200">
+        <h1 class="text-3xl font-extrabold text-blue-800">
+            My <span class="text-green-600">Tax Pro</span>
+        </h1>
+        <!-- Added phone number for quick access on desktop -->
+        <a id="header-phone-link" href="" class="hidden md:block text-lg font-bold text-green-700 hover:text-green-800 transition duration-300">
+            Call us on: <span id="header-phone"></span>
+        </a>
+        <nav class="flex space-x-4 md:space-x-8 text-lg font-medium text-gray-600">
+            <a href="#" id="nav-home" class="nav-link hover:text-blue-600 transition duration-300 active" onclick="showView('home')">Home</a>
+            <a href="#" id="nav-about" class="nav-link hover:text-blue-600 transition duration-300" onclick="showView('about')">About Us</a>
+            <a href="#" id="nav-contact" class="nav-link hover:text-blue-600 transition duration-300" onclick="showView('contact')">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Main Content Area: Use a single container to hold all views -->
+    <main class="w-full max-w-4xl bg-white p-8 md:p-12 rounded-2xl card-shadow border border-gray-100 min-h-[60vh]">
+
+        <!-- 1. HOME VIEW (Default) - Listing Services -->
+        <section id="view-home" class="view-content">
+            <div class="text-center mb-10">
+                <h2 id="home-title" class="text-4xl md:text-5xl font-black text-gray-900 leading-tight mb-4"></h2>
+                <p id="home-subtitle" class="text-xl text-gray-600 max-w-3xl mx-auto"></p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                <!-- Service 1: Freelancers/Sole Traders -->
+                <div class="p-6 rounded-xl border-2 border-green-100 bg-green-50 hover:shadow-lg transition duration-300">
+                    <div class="text-green-600 mb-3">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-1.208-8.455-3.245A2.083 2.083 0 005.15 11h13.7c.682 0 1.25.568 1.25 1.25v.005zm-4.75 3.5c0 .69-.56 1.25-1.25 1.25H9.75c-.69 0-1.25-.56-1.25-1.25v-1.5c0-.69.56-1.25 1.25-1.25h5.5c.69 0 1.25.56 1.25 1.25v1.5zM12 21a9 9 0 100-18 9 9 0 000 18z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2 text-gray-900">Freelancer & Sole Trader Tax</h4>
+                    <p class="text-gray-600 text-sm" id="service-freelancer"></p>
+                </div>
+
+                <!-- Service 2: Landlords -->
+                <div class="p-6 rounded-xl border-2 border-blue-100 bg-blue-50 hover:shadow-lg transition duration-300">
+                    <div class="text-blue-600 mb-3">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a9 9 0 01-9-9m9 9v10a3 3 0 01-3-3v-7m-6 3a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2 text-gray-900">Property & Landlord Tax</h4>
+                    <p class="text-gray-600 text-sm" id="service-landlord"></p>
+                </div>
+
+                <!-- Service 3: General Advice & Planning -->
+                <div class="p-6 rounded-xl border-2 border-indigo-100 bg-indigo-50 hover:shadow-lg transition duration-300">
+                    <div class="text-indigo-600 mb-3">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6m3-3h3"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2 text-gray-900">Capital Gains & Payroll</h4>
+                    <p class="text-gray-600 text-sm" id="service-general"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ABOUT US VIEW -->
+        <section id="view-about" class="view-content hidden">
+            <h2 class="text-4xl font-black text-gray-900 mb-6 border-b pb-3">About <span class="text-green-600">My Tax Pro</span></h2>
+            <div class="space-y-6 text-gray-700">
+                <p class="text-lg font-semibold" id="about-mission"></p>
+                
+                <h3 class="text-2xl font-bold pt-4 text-gray-800">Our Local & National Reach</h3>
+                <p id="about-reach" class="text-base"></p>
+
+                <h3 class="text-2xl font-bold pt-4 text-gray-800">The Advisor</h3>
+                <p id="about-advisor" class="text-base"></p>
+            </div>
+        </section>
+
+        <!-- 3. CONTACT VIEW - Includes a mock form -->
+        <section id="view-contact" class="view-content hidden">
+            <h2 class="text-4xl font-black text-gray-900 mb-6 border-b pb-3">Get in Touch</h2>
+            <p class="text-lg text-gray-700 mb-8" id="contact-blurb"></p>
+
+            <!-- Prominent Phone Contact Block -->
+            <div class="text-center mb-10 p-4 bg-blue-50 rounded-xl">
+                <p class="text-gray-800 text-lg font-medium mb-2">Prefer to speak to an expert now?</p>
+                <a id="contact-phone-link" href="" class="text-4xl font-extrabold text-blue-700 hover:text-blue-800 transition duration-300">
+                    Call us on: <span id="contact-phone-display"></span>
+                </a>
+            </div>
+
+            <form onsubmit="event.preventDefault(); showContactSuccess();" class="max-w-xl mx-auto space-y-4 p-6 bg-gray-50 rounded-xl">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                    <input type="text" id="name" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="email" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700">How can we help you?</label>
+                    <textarea id="message" rows="4" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 px-4 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition duration-300">
+                    Send Message
+                </button>
+            </form>
+
+            <!-- Success Message Modal/Box -->
+            <div id="contact-success" class="hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center p-4">
+                <div class="bg-white p-8 rounded-xl max-w-sm text-center card-shadow">
+                    <h3 class="text-2xl font-bold text-green-600 mb-4">Thank You!</h3>
+                    <p class="text-gray-700">Your message has been received. We will be in touch shortly to discuss your tax needs.</p>
+                    <button onclick="hideContactSuccess()" class="mt-6 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Close</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-4xl py-6 mt-8 border-t border-gray-200 text-center text-gray-500 text-sm">
+        &copy; <span id="current-year"></span> My Tax Pro. Call us on: <a id="footer-phone-link" href="" class="text-blue-600 hover:text-blue-800"></a>. Serving Slough, Hounslow, Windsor, Maidenhead, and the whole UK online.
+    </footer>
+
+    <script>
+        // --- 🔑 Content Management Section 🔑 ---
+        // Modify these variables to easily update the primary text content without diving into HTML structure.
+        const APP_CONTENT = {
+            home: {
+                title: "Expert Tax Advice for Freelancers, Landlords & Sole Traders",
+                subtitle: "We help you legally minimize your tax bill and maximize your peace of mind. Local expertise in the Thames Valley, national reach online.",
+                services: {
+                    freelancer: "Self-Assessment filing, expense guidance, and optimizing income for contractors and gig economy workers.",
+                    landlord: "Capital Gains Tax (CGT), buy-to-let accounts, property income, and complex portfolio structuring.",
+                    general: "Payroll advice, HMRC correspondence, tax planning for business growth, and general financial compliance."
+                }
+            },
+            about: {
+                mission: "Our mission is to provide personalized, precise, and proactive tax advice. We focus exclusively on the specific needs of self-employed individuals and property owners, ensuring you meet all compliance deadlines while benefiting from every legitimate tax advantage.",
+                reach: "Based near the M4 corridor, we offer dedicated in-person service across **Slough, Hounslow, Windsor, and Maidenhead**. For everyone else, our full suite of services is available **online across the entire UK**.",
+                advisor: "Led by a qualified advisor with over 15 years of experience in personal and small business taxation, we pride ourselves on clear communication and a jargon-free approach."
+            },
+            contact: {
+                blurb: "Ready to simplify your tax affairs? Fill out the form below to schedule a free initial consultation. We're here to answer your questions.",
+                phone: "07352 264300" // NEW: Added contact number here
+            }
+        };
+        // --- --------------------------------- ---
+
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Function to initialize content from the JS object
+        function initializeContent() {
+            // Home View
+            document.getElementById('home-title').textContent = APP_CONTENT.home.title;
+            document.getElementById('home-subtitle').textContent = APP_CONTENT.home.subtitle;
+            document.getElementById('service-freelancer').textContent = APP_CONTENT.home.services.freelancer;
+            document.getElementById('service-landlord').textContent = APP_CONTENT.home.services.landlord;
+            document.getElementById('service-general').textContent = APP_CONTENT.home.services.general;
+
+            // About View
+            document.getElementById('about-mission').textContent = APP_CONTENT.about.mission;
+            document.getElementById('about-reach').textContent = APP_CONTENT.about.reach;
+            document.getElementById('about-advisor').textContent = APP_CONTENT.about.advisor;
+
+            // Contact View
+            document.getElementById('contact-blurb').textContent = APP_CONTENT.contact.blurb;
+            
+            // New phone updates for the three locations
+            const cleanPhone = APP_CONTENT.contact.phone.replace(/\s/g, '');
+
+            // Header Phone Link
+            const headerPhoneDisplay = document.getElementById('header-phone');
+            const headerPhoneLink = document.getElementById('header-phone-link');
+            if (headerPhoneDisplay && headerPhoneLink) {
+                headerPhoneDisplay.textContent = APP_CONTENT.contact.phone;
+                headerPhoneLink.href = `tel:${cleanPhone}`;
+            }
+
+            // Contact View Phone Link
+            document.getElementById('contact-phone-display').textContent = APP_CONTENT.contact.phone;
+            document.getElementById('contact-phone-link').href = `tel:${cleanPhone}`;
+
+            // Footer Phone Link
+            const footerPhoneLink = document.getElementById('footer-phone-link');
+            if (footerPhoneLink) {
+                footerPhoneLink.textContent = APP_CONTENT.contact.phone;
+                footerPhoneLink.href = `tel:${cleanPhone}`;
+            }
+        }
+
+        // Function to switch between the views
+        function showView(viewName) {
+            document.querySelectorAll('.view-content').forEach(view => {
+                view.classList.add('hidden');
+            });
+            document.getElementById(`view-${viewName}`).classList.remove('hidden');
+
+            // Update active navigation link styling
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.getElementById(`nav-${viewName}`).classList.add('active');
+            
+            // Scroll to the top of the main content area
+            document.getElementById('view-home').parentElement.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Functions for the mock Contact Success Modal
+        function showContactSuccess() {
+            // Reset form fields (for user experience)
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('message').value = '';
+
+            document.getElementById('contact-success').classList.remove('hidden');
+        }
+
+        function hideContactSuccess() {
+            document.getElementById('contact-success').classList.add('hidden');
+        }
+
+        // Initialize content and show the home view when the script loads
+        window.onload = function() {
+            initializeContent();
+            showView('home');
+        };
+    </script>
+
+</body>
+</html>
