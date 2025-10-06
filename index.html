@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,6 +32,20 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(71, 128, 255, 0.4);
         }
+
+        /* Styling for the custom success message overlay */
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
     </style>
 
     <!-- Structured Data for SEO (JSON-LD) - Helps Google understand the business and services -->
@@ -61,6 +75,23 @@
     </script>
 </head>
 <body class="p-4 md:p-8 flex flex-col items-center">
+
+    <!-- Success Message Overlay (Hidden by Default) -->
+    <div id="contact-success-modal" class="success-overlay hidden">
+        <div class="bg-white p-8 rounded-xl shadow-2xl max-w-sm w-full text-center">
+            <svg class="w-16 h-16 mx-auto text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Message Sent!</h3>
+            <!-- MODIFIED MESSAGE BELOW -->
+            <p class="text-gray-600 mb-6">Thank you. We have received your inquiry and will be in touch shortly.</p>
+            <button 
+                onclick="hideContactSuccess()" 
+                class="w-full py-2 px-4 rounded-lg text-white font-medium bg-blue-600 hover:bg-blue-700 transition"
+            >
+                Close
+            </button>
+        </div>
+    </div>
+
 
     <!-- Header / Navbar -->
     <header class="w-full max-w-4xl flex justify-between items-center py-4 mb-8 border-b border-gray-200">
@@ -190,19 +221,20 @@
                 </header>
 
                 <!-- 
-                    FORM ACTION: CRITICAL STEP. 
-                    You must replace the placeholder URL below with your unique Formspree URL.
-                    Messages will be sent to lucien.davis@gmail.com
+                    FORM ACTION: The Formspree URL is correct.
+                    We added the 'id="contact-form"' and a listener in the <script> block 
+                    to handle the submission asynchronously.
                 -->
                 <form 
                     action="https://formspree.io/f/mqaylvkj" 
                     method="POST" 
                     class="space-y-6"
+                    id="contact-form" 
                 >
 
                     <!-- Full Name Input -->
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <label for="form-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                         <input 
                             type="text" 
                             name="name" 
@@ -215,7 +247,7 @@
 
                     <!-- Email Input -->
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <label for="form-email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                         <input 
                             type="email" 
                             name="_replyto" 
@@ -228,7 +260,7 @@
 
                     <!-- Phone Number Input -->
                     <div>
-                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number (Optional)</label>
+                        <label for="form-phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number (Optional)</label>
                         <input 
                             type="tel" 
                             name="phone" 
@@ -240,7 +272,7 @@
                     
                     <!-- Message Textarea -->
                     <div>
-                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message (Tell us about your needs)</label>
+                        <label for="form-message" class="block text-sm font-medium text-gray-700 mb-1">Your Message (Tell us about your needs)</label>
                         <textarea 
                             id="form-message" 
                             name="message" 
@@ -254,6 +286,7 @@
                     <!-- Submit Button -->
                     <button 
                         type="submit" 
+                        id="submit-button"
                         class="submit-btn w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                     >
                         Send Message & Request Quote
@@ -300,6 +333,67 @@
         // --- --------------------------------- ---
 
         document.getElementById('current-year').textContent = new Date().getFullYear();
+        const contactForm = document.getElementById('contact-form');
+        const submitButton = document.getElementById('submit-button');
+        const successModal = document.getElementById('contact-success-modal');
+
+        // Functions for the custom Contact Success Modal
+        function showContactSuccess() {
+            successModal.classList.remove('hidden');
+        }
+
+        function hideContactSuccess() {
+            successModal.classList.add('hidden');
+        }
+
+        // Asynchronous Form Submission Handler (AJAX)
+        // This prevents the Canvas environment from blocking the navigation/submission.
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(event) {
+                event.preventDefault(); // Stop the default form submission (which causes navigation)
+
+                const form = event.target;
+                const data = new FormData(form);
+                const action = form.action;
+
+                // Disable button and show a working state
+                submitButton.textContent = 'Sending...';
+                submitButton.disabled = true;
+                submitButton.classList.add('opacity-50');
+
+                try {
+                    const response = await fetch(action, {
+                        method: 'POST',
+                        body: data,
+                        // Formspree requires the 'Accept' header for AJAX submissions
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        // Success: Reset form and show success message
+                        form.reset();
+                        showContactSuccess();
+                    } else {
+                        // Handle server errors (e.g., Formspree limit reached)
+                        const errorData = await response.json();
+                        console.error('Formspree Error:', errorData);
+                        alert('Submission failed. Please try calling us directly.'); // Use a simple alert for the error, as the user won't see console
+                    }
+                } catch (error) {
+                    // Handle network errors
+                    console.error('Network Error:', error);
+                    alert('There was a network issue. Please check your connection or call us.');
+                } finally {
+                    // Re-enable button
+                    submitButton.textContent = 'Send Message & Request Quote';
+                    submitButton.disabled = false;
+                    submitButton.classList.remove('opacity-50');
+                }
+            });
+        }
+
 
         // Function to initialize content from the JS object
         function initializeContent() {
