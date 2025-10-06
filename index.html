@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -81,7 +81,7 @@
         <div class="bg-white p-8 rounded-xl shadow-2xl max-w-sm w-full text-center">
             <svg class="w-16 h-16 mx-auto text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             <h3 class="text-2xl font-bold text-gray-900 mb-2">Message Sent!</h3>
-            <!-- MODIFIED MESSAGE BELOW -->
+            <!-- Confirmation message updated -->
             <p class="text-gray-600 mb-6">Thank you. We have received your inquiry and will be in touch shortly.</p>
             <button 
                 onclick="hideContactSuccess()" 
@@ -221,13 +221,10 @@
                 </header>
 
                 <!-- 
-                    FORM ACTION: The Formspree URL is correct.
-                    We added the 'id="contact-form"' and a listener in the <script> block 
-                    to handle the submission asynchronously.
+                    ACTION and METHOD removed from the <form> element to prevent 
+                    browser from doing a standard page navigation/submit.
                 -->
                 <form 
-                    action="https://formspree.io/f/mqaylvkj" 
-                    method="POST" 
                     class="space-y-6"
                     id="contact-form" 
                 >
@@ -327,9 +324,12 @@
             },
             contact: {
                 blurb: "Ready to simplify your tax affairs? Fill out the form below to schedule a free initial consultation. We're here to answer your questions.",
-                phone: "07352 264300" // NEW: Added contact number here
+                phone: "07352 264300" // Contact number
             }
         };
+
+        // ** NEW: Formspree URL constant **
+        const FORMSPREE_URL = "https://formspree.io/f/mqaylvkj"; 
         // --- --------------------------------- ---
 
         document.getElementById('current-year').textContent = new Date().getFullYear();
@@ -354,7 +354,7 @@
 
                 const form = event.target;
                 const data = new FormData(form);
-                const action = form.action;
+                const action = FORMSPREE_URL; // Use the dedicated constant
 
                 // Disable button and show a working state
                 submitButton.textContent = 'Sending...';
@@ -379,7 +379,8 @@
                         // Handle server errors (e.g., Formspree limit reached)
                         const errorData = await response.json();
                         console.error('Formspree Error:', errorData);
-                        alert('Submission failed. Please try calling us directly.'); // Use a simple alert for the error, as the user won't see console
+                        // Using a custom modal would be better, but for a one-off error alert is fine here
+                        alert('Submission failed. Please try calling us directly.'); 
                     }
                 } catch (error) {
                     // Handle network errors
