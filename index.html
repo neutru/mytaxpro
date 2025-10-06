@@ -24,6 +24,14 @@
             border-bottom: 2px solid #3b82f6; /* blue-500 */
             padding-bottom: 0.5rem;
         }
+        /* Style the submit button */
+        .submit-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(71, 128, 255, 0.4);
+        }
     </style>
 
     <!-- Structured Data for SEO (JSON-LD) - Helps Google understand the business and services -->
@@ -160,7 +168,7 @@
             </div>
         </section>
 
-        <!-- 3. CONTACT VIEW - Includes a mock form -->
+        <!-- 3. CONTACT VIEW - INTEGRATED FORM (Replaced Mock Form) -->
         <section id="view-contact" class="view-content hidden">
             <h2 class="text-4xl font-black text-gray-900 mb-6 border-b pb-3">Get in Touch</h2>
             <p class="text-lg text-gray-700 mb-8" id="contact-blurb"></p>
@@ -173,32 +181,90 @@
                 </a>
             </div>
 
-            <form onsubmit="event.preventDefault(); showContactSuccess();" class="max-w-xl mx-auto space-y-4 p-6 bg-gray-50 rounded-xl">
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                    <input type="text" id="name" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
-                </div>
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input type="email" id="email" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border">
-                </div>
-                <div>
-                    <label for="message" class="block text-sm font-medium text-gray-700">How can we help you?</label>
-                    <textarea id="message" rows="4" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"></textarea>
-                </div>
-                <button type="submit" class="w-full py-3 px-4 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition duration-300">
-                    Send Message
-                </button>
-            </form>
+            <!-- START INTEGRATED FORMSPREE CONTACT FORM -->
+            <div class="max-w-xl mx-auto space-y-4 p-6 bg-gray-50 rounded-xl">
+                
+                <header class="mb-4 text-center">
+                    <h3 class="text-2xl font-bold text-gray-900">Start Your Consultation</h3>
+                    <p class="text-md text-gray-600">Fill out the form below and we’ll be in touch quickly.</p>
+                </header>
 
-            <!-- Success Message Modal/Box -->
-            <div id="contact-success" class="hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center p-4">
-                <div class="bg-white p-8 rounded-xl max-w-sm text-center card-shadow">
-                    <h3 class="text-2xl font-bold text-green-600 mb-4">Thank You!</h3>
-                    <p class="text-gray-700">Your message has been received. We will be in touch shortly to discuss your tax needs.</p>
-                    <button onclick="hideContactSuccess()" class="mt-6 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Close</button>
-                </div>
+                <!-- 
+                    FORM ACTION: CRITICAL STEP. 
+                    You must replace the placeholder URL below with your unique Formspree URL.
+                    Messages will be sent to lucien.davis@gmail.com
+                -->
+                <form 
+                    action="https://formspree.io/f/mqaylvkj" 
+                    method="POST" 
+                    class="space-y-6"
+                >
+
+                    <!-- Full Name Input -->
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <input 
+                            type="text" 
+                            name="name" 
+                            id="form-name" 
+                            required 
+                            placeholder="Lucien Davis"
+                            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150"
+                        >
+                    </div>
+
+                    <!-- Email Input -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <input 
+                            type="email" 
+                            name="_replyto" 
+                            id="form-email" 
+                            required 
+                            placeholder="lucien.davis@gmail.com"
+                            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150"
+                        >
+                    </div>
+
+                    <!-- Phone Number Input -->
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number (Optional)</label>
+                        <input 
+                            type="tel" 
+                            name="phone" 
+                            id="form-phone" 
+                            placeholder="07700 900350"
+                            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150"
+                        >
+                    </div>
+                    
+                    <!-- Message Textarea -->
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Message (Tell us about your needs)</label>
+                        <textarea 
+                            id="form-message" 
+                            name="message" 
+                            rows="4" 
+                            required
+                            placeholder="I need help filing my first self-assessment tax return..."
+                            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150"
+                        ></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button 
+                        type="submit" 
+                        class="submit-btn w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    >
+                        Send Message & Request Quote
+                    </button>
+
+                    <p class="text-xs text-center text-gray-500 mt-4">
+                        We respect your privacy. All information is confidential and will only be used to respond to your inquiry.
+                    </p>
+                </form>
             </div>
+            <!-- END INTEGRATED FORMSPREE CONTACT FORM -->
         </section>
 
     </main>
@@ -290,20 +356,6 @@
             
             // Scroll to the top of the main content area
             document.getElementById('view-home').parentElement.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Functions for the mock Contact Success Modal
-        function showContactSuccess() {
-            // Reset form fields (for user experience)
-            document.getElementById('name').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('message').value = '';
-
-            document.getElementById('contact-success').classList.remove('hidden');
-        }
-
-        function hideContactSuccess() {
-            document.getElementById('contact-success').classList.add('hidden');
         }
 
         // Initialize content and show the home view when the script loads
