@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Correct place for description and keywords for SEO -->
+    <meta name="description" content="Expert tax advice and Self Assessment filing for UK freelancers, sole traders, and property landlords in Slough, Hounslow, and nationwide.">
+    <meta name="keywords" content="UK tax advisor, self assessment, sole trader tax, landlord tax, capital gains tax, Slough, Hounslow">
     <title>My Tax Pro | Expert UK Tax Advisor | Freelancers, Landlords, Sole Traders</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -22,6 +25,32 @@
             padding-bottom: 0.5rem;
         }
     </style>
+
+    <!-- Structured Data for SEO (JSON-LD) - Helps Google understand the business and services -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "My Tax Pro",
+      "description": "Expert UK tax advice for freelancers, landlords, and sole traders, specializing in Self Assessment and tax minimization.",
+      "url": "https://mytaxpro.com/", 
+      "telephone": "+447352264300",
+      "priceRange": "$$",
+      "serviceType": [
+        "Tax preparation",
+        "Self Assessment filing",
+        "Property Tax consulting",
+        "Capital Gains Tax advice"
+      ],
+      "areaServed": [
+        { "@type": "City", "name": "Slough" },
+        { "@type": "City", "name": "Hounslow" },
+        { "@type": "City", "name": "Windsor" },
+        { "@type": "City", "name": "Maidenhead" },
+        { "@type": "Country", "name": "UK National (Online)" }
+      ]
+    }
+    </script>
 </head>
 <body class="p-4 md:p-8 flex flex-col items-center">
 
@@ -46,9 +75,45 @@
 
         <!-- 1. HOME VIEW (Default) - Listing Services -->
         <section id="view-home" class="view-content">
+            
+            <!-- Modern Busy Tax Advisor Graphic (SVG) - NEW DETAILED SVG -->
+            <div class="flex justify-center mb-10">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60" fill="none" class="w-72 h-44">
+                    <!-- Desk (Gray/Brown) -->
+                    <rect x="5" y="45" width="90" height="10" fill="#a0a7b4"/>
+
+                    <!-- Advisor (Simple Shape - Head, Body) -->
+                    <circle cx="50" cy="30" r="8" fill="#585050"/> <!-- Head -->
+                    <rect x="40" y="38" width="20" height="10" fill="#1d4ed8"/> <!-- Shirt (Blue) -->
+                    
+                    <!-- Monitors (Two screens for 'busy'/'data') -->
+                    <!-- Left Monitor - Green (Success/Money) -->
+                    <rect x="25" y="15" width="15" height="15" rx="2" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+                    <path d="M28 27 L31 23 L34 25 L37 20" stroke="#059669" stroke-width="1.5" /> <!-- Graph line -->
+                    <!-- Right Monitor - Blue (Data/Processing) -->
+                    <rect x="60" y="15" width="15" height="15" rx="2" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+                    <text x="67.5" y="25" font-size="8" fill="#1d4ed8" text-anchor="middle" font-weight="bold">£</text>
+                    
+                    <!-- Pile of Documents/Paperwork (White/Gray) -->
+                    <rect x="15" y="40" width="10" height="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="0.5"/>
+                    <rect x="75" y="40" width="10" height="5" fill="#f3f4f6" stroke="#9ca3af" stroke-width="0.5"/>
+                    
+                    <!-- Focus/Lightbulb (representing advice/solution) -->
+                    <circle cx="50" cy="8" r="4" fill="#fcd34d"/>
+                    <path d="M50 12 L50 15" stroke="#fcd34d" stroke-width="1"/>
+                </svg>
+            </div>
+            <!-- End Graphic -->
+
             <div class="text-center mb-10">
                 <h2 id="home-title" class="text-4xl md:text-5xl font-black text-gray-900 leading-tight mb-4"></h2>
                 <p id="home-subtitle" class="text-xl text-gray-600 max-w-3xl mx-auto"></p>
+                
+                <!-- Catch Phrase Added -->
+                <p class="text-xl md:text-2xl font-semibold italic text-green-700 mt-6 mb-8">
+                    "Deduct the stress, Claim some rest."
+                </p>
+                <!-- END Catch Phrase -->
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
@@ -249,5 +314,4 @@
     </script>
 
 </body>
-
 </html>
